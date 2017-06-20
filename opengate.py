@@ -46,10 +46,10 @@ for row in cr:
         
         if  country in an :
               
-              server.append(row[0])
-              server.append(row[1])
-              server.append(row[5])
-              #server.append(row[14])
+            server.append(row[0])
+            server.append(row[1])
+            server.append(row[5])
+            server.append(row[14])
 ##            print "DDNS Hostname :" ,row[0]
 ##            print "IP Address : " ,row[1]
 ##            print "Score :" ,row[2]
@@ -74,7 +74,7 @@ for row in cr:
 for server in servers_list :
 
    # List all servers for the user
-   print server
+   print server[0:3]
 
 
 # Ask the user to select a serevr
@@ -84,20 +84,30 @@ for ip in servers_list :
     if user_input in ip :
         
         print 
-        print "[+] VPN SELECTED ", ip
+        print "[+] VPN SELECTED :\n"
+        print "[+] Host Name: ", ip[0]
+        print "[+] IP Address: ", ip[1]
+        print "[+] Country ", ip[2]
+        print
+        
+        used_vpn = ip
+
+        # Create the temp file 
+        _, path = tempfile.mkstemp()
+
+        print path 
+
+        # Generate the certificate
+        f = open(path, 'w')
+        f.write(base64.b64decode(used_vpn[-1]))
+        f.close()
+
     else:
         pass
 
 
 
-##winner = i[1]
-###print winner
-##
-##_, path = tempfile.mkstemp()
-##
-##print path
-##
-##f = open(path, 'w')
-##f.write(base64.b64decode(winner[-1]))
-###f.write('\nscript-security 2\nup /etc/openvpn/update-resolv-conf\ndown /etc/openvpn/update-resolv-conf')
-##f.close()
+
+
+
+
